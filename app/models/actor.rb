@@ -13,7 +13,10 @@
 class Actor < ApplicationRecord
   validates(:name, presence: true)
 
-  def characters
+
+  has_many(:characters)
+  has_many(:filmography, through: :characters, source: :movie)
+    def characters
     key = self.id
 
     the_many = Character.where({ :actor_id => key })
